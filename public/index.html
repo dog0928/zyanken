@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <title>じゃんけんゲーム</title>
+        <style>
+            .resultForm {
+                display: none;
+            }
+        </style>
+    </head>
+    
+    <body>
+        <h1>じゃんけんゲーム</h1>
+        <button id="rock">グー</button>
+        <button id="scissors">チョキ</button>
+        <button id="paper">パー</button>
+        <form class="resultForm">
+            <p id="your-hand">あなたの手: </p>
+            <p id="result">結果: </p>
+            <p><a href="#" id="retry">もう一回勝負する</a></p>
+        </form>
+
+        <script>
+            document.getElementById('rock').addEventListener('click', function() {
+                sendHand('グー');
+            });
+            document.getElementById('scissors').addEventListener('click', function() {
+                sendHand('チョキ');
+            });
+            document.getElementById('paper').addEventListener('click', function() {
+                sendHand('パー');
+            });
+            document.getElementById('retry').addEventListener('click', function(e) {
+                e.preventDefault();
+                location.reload();
+            });
+
+            const form = document.getElementsByClassName('resultForm');
+
+            function sendHand(hand) {
+                fetch(`/zyanken/${hand}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        form[0].style.display = 'block';
+                        document.getElementById('your-hand').textContent = `あなたの手: ${hand}`;
+                        document.getElementById('result').textContent = `結果: ${data.result} (コンピューターの手: ${data.computerHand})`;
+                    })
+                    .catch(error => console.error('Error:', error));
+            }
+        </script>
+    </body>
+</html>
+
