@@ -1,5 +1,5 @@
 # じゃんけんサイト
-<p>ただただ、 `localhost:3000/zyanken/<自分の出した手>` にGETをしてリザルトを表示するだけのプログラムです</p>
+ただただ、`localhost:3000/zyanken/{YoureHand}`にGETをしてリザルトを表示するだけのプログラムです
 
 ## 使い方
 `git clone https://github.com/dog0928/zyanken`<br>
